@@ -6,11 +6,11 @@ const serviceBusService = azure.createServiceBusService(process.env.connectionSt
 const options = {
     MaxSizeInMegabytes: process.env.maxSizeInMb,
     DefaultMessageTimeToLive: process.env.defaultMsgTtl,
-    RequiresSession: process.env.enableSessions,
-    RequiresDuplicateDetection: process.env.enableDuplicateDetection,
+    RequiresSession: (process.env.enableSessions === 'true'),
+    RequiresDuplicateDetection: (process.env.enableDuplicateDetection === 'true'),
     DuplicateDetectionHistoryTimeWindow: process.env.duplicateDetectionWindow,
-    DeadLetteringOnMessageExpiration: process.env.enableDeadLettering,
-    EnablePartitioning: process.env.enablePartitioning,
+    DeadLetteringOnMessageExpiration: (process.env.enableDeadLettering === 'true'),
+    EnablePartitioning: (process.env.enablePartitioning === 'true'),
 };
 
 serviceBusService.createQueueIfNotExists(
@@ -20,7 +20,7 @@ serviceBusService.createQueueIfNotExists(
         if (error) {
             throw error;
         }
-        // Topic was created or exists
-        console.log('topic created or exists.');
+        // Queue was created or exists
+        console.log('queue created or exists.');
     }
 );

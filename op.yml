@@ -43,7 +43,7 @@ inputs:
     string:
       constraints: { enum: ['true', 'false']}
       description: whether dead lettering will be enabled for the provisioned queue
-      default: 'false'
+      default: 'true'
   enablePartitioning:
     string:
       constraints: { enum: ['true', 'false']}
