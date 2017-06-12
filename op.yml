@@ -1,0 +1,73 @@
+name: azure.servicebus.queue.create
+description: creates an azure servicebus queue (if it doesn't already exist)
+inputs:
+  connectionString:
+    string:
+      constraints: { minLength: 1 }
+      description: connection string of servicebus
+      isSecret: true
+  name:
+    string:
+      constraints: { minLength: 1 }
+  maxSizeInMb:
+    number:
+      constraints: { format: integer, minimum: 1 }
+      description: maximum topic size in megabytes
+      default: 1024
+  defaultMsgTtl:
+    string:
+      constraints: { minLength: 1 }
+      description: default msg TTL (as iso 8601 duration) for the provisioned queue specified as an iso 8601 duration
+      default: PT336H
+  lockDuration:
+    string:
+      constraints: { minLength: 1 }
+      description: default lock duration (as iso 8601 duration) for the provisioned queue
+      default: PT30S
+  enableSessions:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether sessions will be enabled for the provisioned queue
+      default: 'false'
+  enableDuplicateDetection:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether duplicate detection will be enabled for the provisioned queue
+      default: 'false'
+  duplicateDetectionWindow:
+    string:
+      constraints: { minLength: 1 }
+      description: duration (as iso 8601 duration) of duplicate detection history for the provisioned queue
+      default: PT10M
+  enableDeadLettering:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether dead lettering will be enabled for the provisioned queue
+      default: 'false'
+  enablePartitioning:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether partitioning will be enabled for the provisioned queue
+      default: 'true'
+version: 1.0.0
+run:
+  container:
+    image: { ref: 'opspecpkgs/azure.servicebus.queue.create:1.0.0' }
+    cmd:
+      - sh
+      - -ce
+      - |
+        npm link azure
+        node index.js
+    files: { /index.js }
+    envVars:
+      connectionString:
+      name:
+      maxSizeInMb:
+      defaultMsgTtl:
+      lockDuration:
+      enableSessions:
+      enableDuplicateDetection:
+      duplicateDetectionWindow:
+      enableDeadLettering:
+      enablePartitioning:
