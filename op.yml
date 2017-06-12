@@ -12,7 +12,7 @@ inputs:
   maxSizeInMb:
     number:
       constraints: { format: integer, minimum: 1 }
-      description: maximum topic size in megabytes
+      description: maximum queue size in megabytes
       default: 1024
   defaultMsgTtl:
     string:
@@ -57,7 +57,7 @@ run:
       - sh
       - -ce
       - |
-        npm link azure
+        npm link azure-sb
         node index.js
     files: { /index.js }
     envVars:

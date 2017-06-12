@@ -1,11 +1,12 @@
-const azure = require('azure');
+const azureSb = require('azure-sb');
 
-const serviceBusService = azure.createServiceBusService(process.env.connectionString);
+const serviceBusService = azureSb.createServiceBusService(process.env.connectionString);
 
 // see https://github.com/Azure/azure-sdk-for-node/blob/master/lib/services/serviceBus/lib/servicebusservice.js#L730
 const options = {
     MaxSizeInMegabytes: process.env.maxSizeInMb,
     DefaultMessageTimeToLive: process.env.defaultMsgTtl,
+    LockDuration: process.env.lockDuration,
     RequiresSession: (process.env.enableSessions === 'true'),
     RequiresDuplicateDetection: (process.env.enableDuplicateDetection === 'true'),
     DuplicateDetectionHistoryTimeWindow: process.env.duplicateDetectionWindow,
