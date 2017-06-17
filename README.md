@@ -24,14 +24,27 @@ run:
   op:
     pkg: { ref: github.com/opspec-pkgs/azure.servicebus.queue.create#VERSION }
     inputs: 
-      connectionString:
+      subscriptionId:
+      location:
+      loginId:
+      loginSecret:
+      loginTenantId:
       name:
-      maxSizeInMb:
-      defaultMsgTtl:
-      lockDuration:
-      enableSessions:
-      enableDuplicateDetection:
-      duplicateDetectionWindow:
-      enableDeadLettering:
+      namespace:
+      resourceGroup:
+      # begin optional args
+      autoDeleteOnIdle:
+      defaultMessageTimeToLive:
+      duplicateDetectionHistoryTimeWindow:
+      enableBatchedOperations:
       enablePartitioning:
+      deadLetteringOnMessageExpiration:
+      lockDuration:
+      loginType:
+      maxDeliveryCount:
+      maxSizeInMegabytes:
+      requiresDuplicateDetection:
+      requiresSession:
+      supportOrdering:
+      # end optional args
 ```

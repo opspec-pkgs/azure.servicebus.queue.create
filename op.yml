@@ -1,73 +1,135 @@
 name: azure.servicebus.queue.create
 description: creates an azure servicebus queue (if it doesn't already exist)
 inputs:
-  connectionString:
+  subscriptionId:
     string:
       constraints: { minLength: 1 }
-      description: connection string of servicebus
+      description: id of azure subscription
+  location:
+    string:
+      constraints: { minLength: 1 }
+      description: location for the provisioned queue
+      default: westus
+  loginId:
+    string:
+      constraints: { minLength: 1 }
+      description: id of user, service principal, or app to login with
+  loginSecret:
+    string:
+      constraints: { minLength: 1 }
+      description: secret of user, service principal, or app to login with
       isSecret: true
+  loginTenantId:
+    string:
+      constraints: { minLength: 1 }
+      description: tenant id of user, service principal, or app to login with
   name:
     string:
       constraints: { minLength: 1 }
-  maxSizeInMb:
-    number:
-      constraints: { format: integer, minimum: 1 }
-      description: maximum queue size in megabytes
-      default: 1024
-  defaultMsgTtl:
+      description: name for the provisioned queue
+  namespace:
     string:
       constraints: { minLength: 1 }
-      description: default msg TTL (as iso 8601 duration) for the provisioned queue specified as an iso 8601 duration
-      default: PT336H
-  lockDuration:
+      description: namespace of the provisioned queue
+  resourceGroup:
     string:
       constraints: { minLength: 1 }
-      description: default lock duration (as iso 8601 duration) for the provisioned queue
-      default: PT30S
-  enableSessions:
-    string:
-      constraints: { enum: ['true', 'false']}
-      description: whether sessions will be enabled for the provisioned queue
-      default: 'false'
-  enableDuplicateDetection:
-    string:
-      constraints: { enum: ['true', 'false']}
-      description: whether duplicate detection will be enabled for the provisioned queue
-      default: 'false'
-  duplicateDetectionWindow:
+      description: resource group for the provisioned servicebus
+  autoDeleteOnIdle:
     string:
       constraints: { minLength: 1 }
-      description: duration (as iso 8601 duration) of duplicate detection history for the provisioned queue
-      default: PT10M
-  enableDeadLettering:
+      description: idle duration after which to delete the provisioned queue
+      default: 10675199.02:48:05.4775807
+  defaultMessageTimeToLive:
+    string:
+      constraints: { minLength: 1 }
+      description: default msg TTL for the provisioned queue specified as an iso 8601 duration
+      default: 14.00:00:00
+  duplicateDetectionHistoryTimeWindow:
+    string:
+      constraints: { minLength: 1 }
+      description: duration of duplicate detection history for the provisioned queue
+      default: 00:00:30
+  enableBatchedOperations:
     string:
       constraints: { enum: ['true', 'false']}
-      description: whether dead lettering will be enabled for the provisioned queue
+      description: whether batched operations will be enabled for the provisioned queue
       default: 'true'
+  deadLetteringOnMessageExpiration:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether dead lettering of expired msgs will be enabled for the provisioned queue
+      default: 'false'
+  enableExpress:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether express entities will be enabled for the provisioned queue
+      default: 'false'
   enablePartitioning:
     string:
       constraints: { enum: ['true', 'false']}
       description: whether partitioning will be enabled for the provisioned queue
       default: 'true'
-version: 1.0.0
+  lockDuration:
+    string:
+      constraints: { minLength: 1 }
+      description: default lock duration for the provisioned queue
+      default: 00:00:30
+  loginType:
+    string:
+      constraints: { enum: [user, sp]}
+      description: type of login; 'user' (default) or 'sp' for service principal
+      default: user
+  maxDeliveryCount:
+    number:
+      constraints: { format: integer, minimum: 1 }
+      description: number of times msg delivery will be attempted for the provisioned queue
+      default: 10
+  maxSizeInMegabytes:
+    number:
+      constraints: { enum: [1024, 2048, 3072, 4096, 5120] }
+      description: maximum queue size in megabytes for the provisioned queue
+      default: 1024
+  requiresDuplicateDetection:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether sessions are enabled for the provisioned queue
+      default: 'false'
+  requiresSession:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether duplicate detection will be enabled for the provisioned queue
+      default: 'false'
+  supportOrdering:
+    string:
+      constraints: { enum: ['true', 'false']}
+      description: whether ordering will be enabled for the provisioned queue
+      default: 'false'
+version: 2.0.0
 run:
   container:
-    image: { ref: 'opspecpkgs/azure.servicebus.queue.create:1.0.0' }
-    cmd:
-      - sh
-      - -ce
-      - |
-        npm link azure-sb
-        node index.js
+    image: { ref: 'opspecpkgs/azure.servicebus.queue.create:2.0.0' }
+    cmd: [node, /index.js]
     files: { /index.js }
     envVars:
-      connectionString:
+      subscriptionId:
+      location:
+      loginId:
+      loginSecret:
+      loginTenantId:
       name:
-      maxSizeInMb:
-      defaultMsgTtl:
-      lockDuration:
-      enableSessions:
-      enableDuplicateDetection:
-      duplicateDetectionWindow:
-      enableDeadLettering:
+      namespace:
+      resourceGroup:
+      autoDeleteOnIdle:
+      defaultMessageTimeToLive:
+      duplicateDetectionHistoryTimeWindow:
+      enableBatchedOperations:
       enablePartitioning:
+      deadLetteringOnMessageExpiration:
+      lockDuration:
+      loginType:
+      maxDeliveryCount:
+      maxSizeInMegabytes:
+      requiresDuplicateDetection:
+      requiresSession:
+      supportOrdering:
