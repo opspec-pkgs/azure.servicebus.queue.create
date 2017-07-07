@@ -93,12 +93,12 @@ inputs:
   requiresDuplicateDetection:
     string:
       constraints: { enum: ['true', 'false']}
-      description: whether sessions are enabled for the provisioned queue
+      description: whether duplicate detection will be enabled for the provisioned queue
       default: 'false'
   requiresSession:
     string:
       constraints: { enum: ['true', 'false']}
-      description: whether duplicate detection will be enabled for the provisioned queue
+      description: whether sessions are enabled for the provisioned queue
       default: 'false'
   supportOrdering:
     string:
