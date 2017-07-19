@@ -20,33 +20,32 @@ opctl run github.com/opspec-pkgs/azure.servicebus.queue.create#VERSION
 ## compose
 
 ```yaml
-run:
-  op:
-    pkg: { ref: github.com/opspec-pkgs/azure.servicebus.queue.create#VERSION }
-    inputs: 
-      subscriptionId:
-      location:
-      loginId:
-      loginSecret:
-      loginTenantId:
-      name:
-      namespace:
-      resourceGroup:
-      # begin optional args
-      autoDeleteOnIdle:
-      defaultMessageTimeToLive:
-      duplicateDetectionHistoryTimeWindow:
-      enableBatchedOperations:
-      enablePartitioning:
-      deadLetteringOnMessageExpiration:
-      lockDuration:
-      loginType:
-      maxDeliveryCount:
-      maxSizeInMegabytes:
-      requiresDuplicateDetection:
-      requiresSession:
-      supportOrdering:
-      # end optional args
+op:
+  pkg: { ref: github.com/opspec-pkgs/azure.servicebus.queue.create#VERSION }
+  inputs: 
+    subscriptionId:
+    location:
+    loginId:
+    loginSecret:
+    loginTenantId:
+    name:
+    namespace:
+    resourceGroup:
+    # begin optional args
+    autoDeleteOnIdle:
+    defaultMessageTimeToLive:
+    duplicateDetectionHistoryTimeWindow:
+    enableBatchedOperations:
+    enablePartitioning:
+    deadLetteringOnMessageExpiration:
+    lockDuration:
+    loginType:
+    maxDeliveryCount:
+    maxSizeInMegabytes:
+    requiresDuplicateDetection:
+    requiresSession:
+    supportOrdering:
+    # end optional args
 ```
 
 # Support
