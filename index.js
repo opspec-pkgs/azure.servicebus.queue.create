@@ -58,5 +58,5 @@ const createOrUpdate = async (credentials) => {
 
 login().then(createOrUpdate).catch(error => {
     console.log(error);
-    process.exit(1)
+    process.exit(1);
 });
