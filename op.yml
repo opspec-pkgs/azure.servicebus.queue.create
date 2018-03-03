@@ -1,4 +1,4 @@
-name: azure.servicebus.queue.create
+name: github.com/opspec-pkgs/azure.servicebus.queue.create
 description: creates an azure servicebus queue (if it doesn't already exist)
 inputs:
   subscriptionId:
