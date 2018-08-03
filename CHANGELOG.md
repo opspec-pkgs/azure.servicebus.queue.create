@@ -5,6 +5,12 @@ All notable changes will be documented in this file in accordance with
 
 ## \[Unreleased]
 
+## \[2.1.1] - 2018-08-03
+
+### Fixed
+
+- [Unable to set lockDuration properly](https://github.com/opspec-pkgs/azure.servicebus.queue.create/issues/1)
+
 ## \[2.1.0] - 2018-03-07
 
 ### Added
