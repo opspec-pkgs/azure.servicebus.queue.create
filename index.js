@@ -38,7 +38,7 @@ const createOrUpdate = async (credentials) => {
         deadLetteringOnMessageExpiration: (process.env.deadLetteringOnMessageExpiration === 'true'),
         enableExpress: (process.env.enableExpress === 'true'),
         enablePartitioning: (process.env.enablePartitioning === 'true'),
-        lockDuration: process.lockDuration,
+        lockDuration: process.env.lockDuration,
         maxDeliveryCount: parseInt(process.env.maxDeliveryCount),
         maxSizeInMegabytes: parseInt(process.env.maxSizeInMegabytes),
         requiresDuplicateDetection: (process.env.requiresDuplicateDetection === 'true'),
